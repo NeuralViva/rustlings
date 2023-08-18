@@ -8,10 +8,26 @@
 //
 // Execute `rustlings hint traits2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
 trait AppendBar {
     fn append_bar(self) -> Self;
+}
+
+impl AppendBar for Vec<String> {
+    fn append_bar(mut self) -> Vec<String> {
+        self.push(String::from("Bar"));
+        self
+    }
+}
+
+trait AppendString {
+    fn append_string(self, val: String) -> Self;
+}
+
+impl AppendString for Vec<String> {
+    fn append_string(mut self, val: String) -> Vec<String> {
+        self.push(String::from(val));
+        self
+    }
 }
 
 // TODO: Implement trait `AppendBar` for a vector of strings.
@@ -23,6 +39,13 @@ mod tests {
     #[test]
     fn is_vec_pop_eq_bar() {
         let mut foo = vec![String::from("Foo")].append_bar();
+        assert_eq!(foo.pop().unwrap(), String::from("Bar"));
+        assert_eq!(foo.pop().unwrap(), String::from("Foo"));
+    }
+
+    #[test]
+    fn is_vec_pop_eq_string() {
+        let mut foo = vec![String::from("Foo")].append_string("Bar".to_string());
         assert_eq!(foo.pop().unwrap(), String::from("Bar"));
         assert_eq!(foo.pop().unwrap(), String::from("Foo"));
     }
