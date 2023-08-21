@@ -18,13 +18,13 @@
 
 use std::fmt::Display;
 
-pub struct ReportCard<T> {
+pub struct ReportCard<T, U> {
     pub grade: T,
     pub student_name: String,
-    pub student_age: u8,
+    pub student_age: U,
 }
 
-impl<T: Display> ReportCard<T> {
+impl<T: Display, U: Display> ReportCard<T, U> {
     pub fn print(&self) -> String {
         format!("{} ({}) - achieved a grade of {}",
             &self.student_name, &self.student_age, &self.grade)
@@ -37,7 +37,7 @@ mod tests {
 
     #[test]
     fn generate_numeric_report_card() {
-        let report_card: ReportCard<f32> = ReportCard {
+        let report_card: ReportCard<f32, u8> = ReportCard {
             grade: 2.1,
             student_name: "Tom Wriggle".to_string(),
             student_age: 12,
@@ -49,9 +49,9 @@ mod tests {
     }
 
     #[test]
-    fn generate_alphabetic_report_card() {
+    fn generate_semi_alphabetic_report_card() {
         // TODO: Make sure to change the grade here after you finish the exercise.
-        let report_card: ReportCard<String> = ReportCard {
+        let report_card: ReportCard<String, u8> = ReportCard {
             grade: "A+".to_string(),
             student_name: "Gary Plotter".to_string(),
             student_age: 11,
@@ -59,6 +59,20 @@ mod tests {
         assert_eq!(
             report_card.print(),
             "Gary Plotter (11) - achieved a grade of A+"
+        );
+    }
+
+    #[test]
+    fn generate_alphabetic_report_card() {
+        // TODO: Make sure to change the grade here after you finish the exercise.
+        let report_card: ReportCard<String, String> = ReportCard {
+            grade: "Z-".to_string(),
+            student_name: "Gary Trotter".to_string(),
+            student_age: "13".to_string(),
+        };
+        assert_eq!(
+            report_card.print(),
+            "Gary Trotter (13) - achieved a grade of Z-"
         );
     }
 }
