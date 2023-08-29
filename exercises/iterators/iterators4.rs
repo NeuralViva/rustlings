@@ -3,9 +3,23 @@
 // Execute `rustlings hint iterators4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 pub fn factorial(num: u64) -> u64 {
+    // Imperative implementation
+    // if num <= 0 {
+    //     return 1;
+    // }
+    // let mut factorial = num.clone(); 
+    // for i in 1..=num - 1 {
+    //     factorial = factorial * i;
+    // }
+    // factorial
+
+    // Functional implementation using fold
+    // (1..=num).fold(1, |acc, x| acc * x)
+
+    // Functional implementation using product of integer iterator
+    (1..=num).product()
+
     // Complete this function to return the factorial of num
     // Do not use:
     // - return
